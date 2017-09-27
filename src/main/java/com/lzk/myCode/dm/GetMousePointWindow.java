@@ -9,14 +9,16 @@ public class GetMousePointWindow {
 	
 	public static void main(String[] args) {
 		DM dm = new DM();
+		System.out.println(dm.Ver());
 		Object getMousePointWindow = dm.GetMousePointWindow();
 		System.out.println(getMousePointWindow);
 	}
 	
 	static{
 		try {
+			System.out.println(System.getProperty("java.library.path"));
 			String dllPath = System.getProperty("user.dir")+"/src/main/resources/dll";
-			addLibraryDir(dllPath);
+			addLibraryDir(dllPath);//添加当前项目/src/main/resources/dll目录为java.library.path
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
