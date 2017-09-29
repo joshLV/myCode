@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestCHMJ {
-	private static final String File_SEPORATOR="/";//ÎÄ¼ş·Ö¸ô·û
+	private static final String File_SEPORATOR="/";//æ–‡ä»¶åˆ†éš”ç¬¦
 	private static final List<String> list = new ArrayList<String>();
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
-			ChmManager cm = new ChmManager(System.getProperty("user.dir")+"/src/main/resources/dll/´óÄ®½Ó¿ÚËµÃ÷.CHM");
+			ChmManager cm = new ChmManager(System.getProperty("user.dir")+"/src/main/resources/dll/å¤§æ¼ æ¥å£è¯´æ˜.CHM");
 			getContentFils(cm);
 			for (String string : list) {
 				System.out.println(string);
@@ -36,7 +36,7 @@ public class TestCHMJ {
 		for (int i = 0; i < fes.size(); i++) {
 			fe = (FileEntry)fes.get(i);
 			//if(fe.entryName.equals("/chapter17/-Unlicensed-17.04.08.htm"))
-			 extractOne(cm,fe,System.getProperty("user.dir")+"/src/main/resources/´óÄ®½Ó¿ÚËµÃ÷html",fe.entryName);
+			 extractOne(cm,fe,System.getProperty("user.dir")+"/src/main/resources/å¤§æ¼ æ¥å£è¯´æ˜html",fe.entryName);
 		}
 
 	}
@@ -62,7 +62,7 @@ public class TestCHMJ {
 	            //fops=new FileOutputStream(file.getPath());
 	            for(int i=0;i<tmp.length;i++){
 	            	//System.out.println(new String(tmp[i]));
-	            	list.add(new String(tmp[i]));
+	            	list.add(new String(tmp[i],"GBK"));
 	                //fops.write(tmp[i]);
 	            	}
 	            //fops.close();
@@ -72,22 +72,22 @@ public class TestCHMJ {
 	    }
 	    
 	    /**
-		 * ËµÃ÷:´´½¨Ã¿¸öÎÄ¼şµÄ¸¸Ä¿Â¼
+		 * è¯´æ˜:åˆ›å»ºæ¯ä¸ªæ–‡ä»¶çš„çˆ¶ç›®å½•
 		 * DATE:2010-08-13
-		 * @param output		×ÜÄ¿Â¼
-		 * @param filePath		ÎÄ¼şÂ·¾¶
+		 * @param output		æ€»ç›®å½•
+		 * @param filePath		æ–‡ä»¶è·¯å¾„
 		 * @throws Exception
 		 */
 		private static void createFileParentPath(String output,String filePath) throws Exception{
 			int spcialTagMark=filePath.indexOf(File_SEPORATOR);
-			if(spcialTagMark==-1)return;//ËµÃ÷ÎÄ×Ö´æ·ÅÓÚ¸ùÄ¿Â¼ÏÂ
+			if(spcialTagMark==-1)return;//è¯´æ˜æ–‡å­—å­˜æ”¾äºæ ¹ç›®å½•ä¸‹
 			filePath=filePath.substring(0, filePath.lastIndexOf(File_SEPORATOR));
 			if(CommonFunctions.isNotEmpty(filePath)){
 				createFileDirectory(output,filePath);
 			}
 		}
 		/**
-		 * ËµÃ÷:´´½¨Ä¿Â¼
+		 * è¯´æ˜:åˆ›å»ºç›®å½•
 		 * @param output
 		 * @param filePath
 		 * @throws Exception
@@ -99,8 +99,8 @@ public class TestCHMJ {
 				for (int i = 0; i < filePaths.length; i++) {
 					if (CommonFunctions.isEmpty(filePaths[i]))
 						continue;
-					// ×é×°×ÓÄ¿Â¼µÄ¸¸Ç×Ä¿Â¼
-					if (i == (filePaths.length - 1)) {// ×îºóÒ»¸ö½ÚµãÊ±
+					// ç»„è£…å­ç›®å½•çš„çˆ¶äº²ç›®å½•
+					if (i == (filePaths.length - 1)) {// æœ€åä¸€ä¸ªèŠ‚ç‚¹æ—¶
 						tmpPath = tmpPath + filePaths[i];
 					} else {
 						tmpPath = tmpPath + filePaths[i] + File_SEPORATOR;
@@ -109,25 +109,25 @@ public class TestCHMJ {
 					File dest = new File(output, tmpPath);
 					CommonFunctions.createDirectory(dest);
 				}
-			} else {//Èç¹ûÃ»ÓĞË«²ãÄ¿Â¼,ÔòÖ±½ÓÔÚ¸ùÄ¿Â¼´´½¨ÎÄ¼ş¼Ğ
+			} else {//å¦‚æœæ²¡æœ‰åŒå±‚ç›®å½•,åˆ™ç›´æ¥åœ¨æ ¹ç›®å½•åˆ›å»ºæ–‡ä»¶å¤¹
 				File dest = new File(output,filePath);
 				CommonFunctions.createDirectory(dest);
 			}
 		}
 		
 		public static void writeFile(List<String> list ) throws IOException{
-			BufferedWriter bw = new BufferedWriter(new FileWriter("bbb.java"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("å¤§æ¼ å¸®åŠ©æ–‡æ¡£è½¬å…¨æ–‡æœ¬.java"));
 			
-			//Ê¹ÓÃ¸ßĞ§×Ö·ûÊäÈëÁ÷ÌØÓĞµÄ·½·¨£¬Ò»´Î¶ÁÈ¡Ò»¸öĞĞ
-			//Ò»´ÎĞ´ÈëÒ»¸ö×Ö·û´®
+			//ä½¿ç”¨é«˜æ•ˆå­—ç¬¦è¾“å…¥æµç‰¹æœ‰çš„æ–¹æ³•ï¼Œä¸€æ¬¡è¯»å–ä¸€ä¸ªè¡Œ
+			//ä¸€æ¬¡å†™å…¥ä¸€ä¸ªå­—ç¬¦ä¸²
 			for (String string : list) {
 				bw.write(string);
-				//»»ĞĞ
+				//æ¢è¡Œ
 				//bw.newLine();
 				bw.flush();
 			}
 			
-			//ÊÍ·Å×ÊÔ´
+			//é‡Šæ”¾èµ„æº
 			bw.close();
 		}
 
