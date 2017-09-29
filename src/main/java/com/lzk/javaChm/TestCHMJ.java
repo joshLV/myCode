@@ -1,7 +1,9 @@
 package com.lzk.javaChm;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ public class TestCHMJ {
 			for (String string : list) {
 				System.out.println(string);
 			}
+			writeFile(list);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -110,6 +113,22 @@ public class TestCHMJ {
 				File dest = new File(output,filePath);
 				CommonFunctions.createDirectory(dest);
 			}
+		}
+		
+		public static void writeFile(List<String> list ) throws IOException{
+			BufferedWriter bw = new BufferedWriter(new FileWriter("bbb.java"));
+			
+			//使用高效字符输入流特有的方法，一次读取一个行
+			//一次写入一个字符串
+			for (String string : list) {
+				bw.write(string);
+				//换行
+				//bw.newLine();
+				bw.flush();
+			}
+			
+			//释放资源
+			bw.close();
 		}
 
 }
